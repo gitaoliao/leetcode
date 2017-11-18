@@ -32,49 +32,47 @@ var removeDuplicates = function(nums) {
 
         };
 ```
-#### 2改：
+#### 2改：可以替代出来的都取出来。
 ```
 var removeDuplicates = function (nums) {
-var len = nums.length;
-if(len<2) return len;
-var ipos = len-2;
-var numval = nums[len-1];
-while(ipos >= 0){
+           var len = nums.length;
+           if(len<2) return len;
+           var ipos = len-2;
+           var numval = nums[len-1];
+           while(ipos >= 0){
+               if(nums[ipos]===numval){
+                   var dupStat = ipos;
+                   while(ipos>=0 && nums[ipos]===numval)ipos--;
+                   nums.splice(ipos+1,dupStat-ipos);
+               }else{
+                   numval = nums[ipos];
+                   ipos--;
+               }
+           }
+           return nums.length;
+       };
 
-if(nums[ipos]===numval){
-var dupStat = ipos;
-while(ipos>=0 && nums[ipos]===numval)ipos--;
-nums.splice(ipos+1,dupStat-ipos);
-
-
-}else{
-numval = nums[ipos];
-ipos--;
-}
-
-}
-return nums.length;
-};
 ```
 
-### 返回数组的长度，跨越长度的不用管。。
+### 3改：返回数组的长度，跨越长度的不用管。。
 
 ```
 var removeDuplicates = function (nums){
-var len = nums.length;
-if(len < 2){
-return len;
-}
-var j = 0;
-for(var i = 1;i<len;i++){
-if(nums[j] !== nums[i]){
-j++;
-nums[j]=nums[i];
-}
-}
-return ++j;
-};
+            var len = nums.length;
+            if(len < 2){
+                return len;
+            }
+            var j = 0;
+            for(var i = 1;i<len;i++){
+                if(nums[j] !== nums[i]){
+                    j++;
+                    nums[j]=nums[i];
+                }
+            }
+            return ++j;
+        };
+
 ```
 
 
-##### 心得：看懂题。。
+##### 心得：看懂题。
